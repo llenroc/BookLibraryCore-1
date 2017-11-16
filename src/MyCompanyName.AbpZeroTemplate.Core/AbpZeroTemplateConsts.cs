@@ -6,7 +6,8 @@
 
         public const string ConnectionStringName = "Default";
 
-        public const bool MultiTenancyEnabled = true;
+        //多租户开关
+        public const bool MultiTenancyEnabled = false;
 
         public const int PaymentCacheDurationInMinutes = 30;
     }
