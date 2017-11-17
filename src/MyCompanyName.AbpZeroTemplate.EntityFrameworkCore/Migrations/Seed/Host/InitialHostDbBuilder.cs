@@ -18,6 +18,8 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations.Seed.Host
             new HostRoleAndUserCreator(_context).Create();
             new DefaultSettingsCreator(_context).Create();
 
+            new InitialPeopleCreator(_context).Create();//20171117增加
+
             _context.SaveChanges();
         }
     }
