@@ -11,6 +11,18 @@ namespace MyCompanyName.AbpZeroTemplate.People
 {
     public interface IPersonAppService:IApplicationService
     {
+        /// <summary>
+        /// 根据参数获取people集合
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         ListResultDto<PersonListDto> GetPeople(GetPeopleInput input);
+
+        /// <summary>
+        /// 添加一个Person
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task CreatePerson(CreatePersonInput input);
     }
 }

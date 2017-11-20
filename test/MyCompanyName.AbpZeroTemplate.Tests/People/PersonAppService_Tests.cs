@@ -1,8 +1,10 @@
-﻿using MyCompanyName.AbpZeroTemplate.People;
+﻿using Abp.Runtime.Validation;
+using MyCompanyName.AbpZeroTemplate.People;
 using MyCompanyName.AbpZeroTemplate.People.Dto;
 using Shouldly;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Xunit;
 
@@ -37,6 +39,40 @@ namespace MyCompanyName.AbpZeroTemplate.Tests.People
             persons.Items.Count.ShouldBe(1);
             persons.Items[0].Name.ShouldBe("Douglas");
             persons.Items[0].SurName.ShouldBe("Adams");
+        }
+        [Fact]
+        public async void Should_Create_Person_With_Valid_Arguments()
+        {
+            await _personAppService.CreatePerson(
+                new CreatePersonInput
+                {
+                    Name="John",
+                    SurName="Nash",
+                    EmailAddress="john.nash@126.com"
+                });
+
+            UsingDbContext(
+                context =>
+                {
+                    var john = context.Persons.FirstOrDefault(p => p.EmailAddress == "john.nash@126.com");
+                    john.ShouldNotBe(null);
+                    john.Name.ShouldBe("John");
+                });
+        }
+
+        public async void Should_Not_Create_Person_With_Invalid_Arguments()
+        {
+            await Assert.ThrowsAsync<AbpValidationException>(
+                async () =>
+                {
+                    await _personAppService.CreatePerson(
+                        new CreatePersonInput
+                        {
+                            Name = "John"
+                        }
+                        );
+                }
+                );
         }
     }
 }

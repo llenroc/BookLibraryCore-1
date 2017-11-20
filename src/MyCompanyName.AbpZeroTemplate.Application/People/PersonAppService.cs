@@ -20,6 +20,13 @@ namespace MyCompanyName.AbpZeroTemplate.People
         {
             _personRepository = personRepository;//属性注入
         }
+
+        public async Task CreatePerson(CreatePersonInput input)
+        {
+            var person = ObjectMapper.Map<Person>(input);
+            await _personRepository.InsertAsync(person);
+        }
+
         /// <summary>
         /// 根据过滤参数获取People
         /// </summary>
