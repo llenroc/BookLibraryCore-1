@@ -1,7 +1,9 @@
 ﻿using Abp.Application.Services.Dto;
+using Abp.Authorization;
 using Abp.Collections.Extensions;
 using Abp.Domain.Repositories;
 using Abp.Extensions;
+using MyCompanyName.AbpZeroTemplate.Authorization;
 using MyCompanyName.AbpZeroTemplate.People.Dto;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace MyCompanyName.AbpZeroTemplate.People
 {
+    [AbpAuthorize(AppPermissions.Pages_Tenant_PhoneBook)]//20171124添加权限验证
     public class PersonAppService : AbpZeroTemplateAppServiceBase, IPersonAppService
     {
         

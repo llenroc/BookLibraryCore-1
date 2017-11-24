@@ -43,6 +43,9 @@
 
         public const string Pages_Tenant_Dashboard = "Pages.Tenant.Dashboard";
 
+        //20171124添加电话簿权限字符串
+        public const string Pages_Tenant_PhoneBook = "Pages.Tenant.PhoneBook";
+
         public const string Pages_Administration_Tenant_Settings = "Pages.Administration.Tenant.Settings";
 
         public const string Pages_Administration_Tenant_SubscriptionManagement = "Pages.Administration.Tenant.SubscriptionManagement";
