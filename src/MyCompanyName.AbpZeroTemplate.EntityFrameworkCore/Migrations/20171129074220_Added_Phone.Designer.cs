@@ -19,9 +19,10 @@ using System;
 namespace MyCompanyName.AbpZeroTemplate.Migrations
 {
     [DbContext(typeof(AbpZeroTemplateDbContext))]
-    partial class AbpZeroTemplateDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171129074220_Added_Phone")]
+    partial class Added_Phone
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

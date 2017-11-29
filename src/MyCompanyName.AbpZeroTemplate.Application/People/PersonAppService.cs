@@ -3,6 +3,7 @@ using Abp.Authorization;
 using Abp.Collections.Extensions;
 using Abp.Domain.Repositories;
 using Abp.Extensions;
+using Microsoft.EntityFrameworkCore;
 using MyCompanyName.AbpZeroTemplate.Authorization;
 using MyCompanyName.AbpZeroTemplate.People.Dto;
 using System;
@@ -18,16 +19,44 @@ namespace MyCompanyName.AbpZeroTemplate.People
     {
         
         private readonly IRepository<Person> _personRepository;//Person仓储
+        private readonly IRepository<Phone,long> _phoneRepository;//Phone仓储
 
-        public PersonAppService(IRepository<Person> personRepository)
+        public PersonAppService(IRepository<Person> personRepository,IRepository<Phone,long> phoneRepository)
         {
             _personRepository = personRepository;//属性注入
+            _phoneRepository = phoneRepository;
         }
 
+        public async Task<PhoneInPersonListDto> AddPhone(AddPhoneInput input)
+        {
+            var person = _personRepository.Get(input.PersonId);
+            await _personRepository.EnsureCollectionLoadedAsync(person, p => p.Phones);//确保person的phones导航属性从数据库中加载
+
+            var phone = ObjectMapper.Map<Phone>(input);
+            person.Phones.Add(phone);
+
+            //Get auto increment Id of the new Phone by saving to database
+            await CurrentUnitOfWork.SaveChangesAsync();
+
+            return ObjectMapper.Map<PhoneInPersonListDto>(phone);
+
+        }
+
+        [AbpAuthorize(AppPermissions.Pages_Tenant_PhoneBook_CreatePerson)]
         public async Task CreatePerson(CreatePersonInput input)
         {
             var person = ObjectMapper.Map<Person>(input);
             await _personRepository.InsertAsync(person);
+        }
+        [AbpAuthorize(AppPermissions.Pages_Tenant_PhoneBook_DeletePerson)]
+        public async Task DeletePerson(EntityDto input)
+        {
+            await _personRepository.DeleteAsync(input.Id);
+        }
+
+        public async Task DeletePhone(EntityDto<long> input)
+        {
+            await _phoneRepository.DeleteAsync(input.Id);
         }
 
         /// <summary>
@@ -37,7 +66,9 @@ namespace MyCompanyName.AbpZeroTemplate.People
         /// <returns></returns>
         public ListResultDto<PersonListDto> GetPeople(GetPeopleInput input)
         {
-            var people = _personRepository.GetAll().WhereIf(
+            var people = _personRepository.GetAll()
+                .Include(p=>p.Phones)
+                .WhereIf(
                 !input.Filter.IsNullOrEmpty(),
                 p => p.Name.Contains(input.Filter) ||
                 p.SurName.Contains(input.Filter) ||

@@ -21,6 +21,12 @@ namespace MyCompanyName.AbpZeroTemplate.EntityFrameworkCore
         /// Person实体集合
         /// </summary>
         public virtual DbSet<Person> Persons { get; set; }
+        /// <summary>
+        /// 电话实体集合
+        /// </summary>
+        public virtual DbSet<Phone> Phones { get; set; }
+
+
 
         public virtual DbSet<BinaryObject> BinaryObjects { get; set; }
 

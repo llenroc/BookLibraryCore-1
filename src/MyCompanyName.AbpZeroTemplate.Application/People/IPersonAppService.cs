@@ -24,5 +24,25 @@ namespace MyCompanyName.AbpZeroTemplate.People
         /// <param name="input"></param>
         /// <returns></returns>
         Task CreatePerson(CreatePersonInput input);
+
+        /// <summary>
+        /// 删除一个Person
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task DeletePerson(EntityDto input);
+
+        /// <summary>
+        /// 删除一个Phone
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task DeletePhone(EntityDto<long> input);
+        /// <summary>
+        /// 添加一个电话号码
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<PhoneInPersonListDto> AddPhone(AddPhoneInput input);
     }
 }

@@ -26,7 +26,13 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations.Seed.Host
                 {
                     Name = "Douglas",
                     SurName = "Adams",
-                    EmailAddress = "douglas.adams@fortytwo.com"
+                    EmailAddress = "douglas.adams@fortytwo.com",
+                    Phones = new List<Phone>
+                                {
+                                    new Phone {Type = PhoneType.Home, Number = "1112242"},
+                                    new Phone {Type = PhoneType.Mobile, Number = "2223342"}
+                                }
+
                 });
 
             }
@@ -39,7 +45,12 @@ namespace MyCompanyName.AbpZeroTemplate.Migrations.Seed.Host
                     {
                         Name = "Isaac",
                         SurName = "Asimov",
-                        EmailAddress = "isaac.asimov@foundation.org"
+                        EmailAddress = "isaac.asimov@foundation.org",
+                        Phones = new List<Phone>
+                                {
+                                    new Phone {Type = PhoneType.Home, Number = "8889977"}
+                                }
+
                     });
             }
 

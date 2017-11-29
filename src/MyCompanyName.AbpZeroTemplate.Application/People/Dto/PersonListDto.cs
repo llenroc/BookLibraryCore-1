@@ -2,6 +2,7 @@
 using Abp.AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,5 +17,7 @@ namespace MyCompanyName.AbpZeroTemplate.People.Dto
         public string SurName { get; set; }
 
         public string EmailAddress { get; set; }
+        public Collection<PhoneInPersonListDto> Phones { get; set; }
+
     }
 }

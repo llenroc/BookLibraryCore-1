@@ -35,5 +35,10 @@ namespace MyCompanyName.AbpZeroTemplate.People
         /// </summary>
         [MaxLength(MaxEmailAddressLength)]
         public virtual string EmailAddress { get; set; }
+
+        /// <summary>
+        /// 电话号码列表
+        /// </summary>
+        public virtual ICollection<Phone> Phones { get; set; }
     }
 }
