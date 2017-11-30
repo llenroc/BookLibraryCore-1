@@ -44,5 +44,19 @@ namespace MyCompanyName.AbpZeroTemplate.People
         /// <param name="input"></param>
         /// <returns></returns>
         Task<PhoneInPersonListDto> AddPhone(AddPhoneInput input);
+
+        /// <summary>
+        /// 获取一个Person
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<GetPersonForEditOutput> GetPersonForEdit(GetPersonForEditInput input);
+
+        /// <summary>
+        /// 修改Person
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task EditPerson(EditPersonInput input);
     }
 }
